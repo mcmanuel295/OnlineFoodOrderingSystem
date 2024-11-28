@@ -24,7 +24,8 @@ public class User {
     private USER_ROLE role;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true
+    )
     private List<Order> order = new ArrayList<>();
 
     @ElementCollection
