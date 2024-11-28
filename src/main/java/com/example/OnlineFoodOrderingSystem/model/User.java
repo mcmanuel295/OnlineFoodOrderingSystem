@@ -1,13 +1,13 @@
 package com.example.OnlineFoodOrderingSystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,9 +22,17 @@ public class User {
     private String email;
     private String password;
     private USER_ROLE role;
-    private List<Order> order;
-    private String favourite;
-    private String address;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Order> order = new ArrayList<>();
+
+    @ElementCollection
+    private List<RestaurantDto> favourite = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
+
     private  String string;
 
 }
