@@ -24,9 +24,8 @@ public class User {
     private USER_ROLE role;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true
-    )
-    private List<Order> order = new ArrayList<>();
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Orders> order = new ArrayList<>();
 
     @ElementCollection
     private List<RestaurantDto> favourite = new ArrayList<>();

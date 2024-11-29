@@ -12,10 +12,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Orders {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
     @ManyToOne
@@ -35,7 +35,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "address")
-    private Address deliveryAddess;
+    private Address deliveryAddress;
 
     @OneToMany
     private List<OrderItems> items;

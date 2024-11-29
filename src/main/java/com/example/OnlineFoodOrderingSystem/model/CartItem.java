@@ -1,35 +1,32 @@
 package com.example.OnlineFoodOrderingSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-@Table(name = "order_items", indexes = @Index(name = "idx_items_id", columnList = "items_id"))
+
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class OrderItems {
-
+@NoArgsConstructor
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long itemsId;
+    private Long id;
+
+    @JsonIgnore
+    @ManyToOne
+    private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Orders order;
-
-    @ManyToOne
-    @JoinColumn(name = "food")
-    private  Food food;
+    private Food food;
 
     private int quantity;
-    private long totalPrice;
 
     private List<String> ingredients;
 
+    private long totalPrice;
 }
-
-
