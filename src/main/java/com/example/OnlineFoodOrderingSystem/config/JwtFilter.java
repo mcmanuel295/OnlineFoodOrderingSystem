@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -28,12 +29,15 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     JwtService jwtService;
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
+    ) throws ServletException, IOException {
 
         String header = request.getHeader("Authorization");
         String token=null;
+
 
         if (header!=null && header.startsWith("Bearer ")){
             token = header.substring(7);
@@ -65,7 +69,7 @@ public class JwtFilter extends OncePerRequestFilter {
             UserDetails userDetails = new CustomUserDetailService().loadUserByUsername(username);
 
             if(jwtService.validateToken(userDetails,token)){
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
             }
