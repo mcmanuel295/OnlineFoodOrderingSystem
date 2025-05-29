@@ -3,10 +3,10 @@ package com.example.OnlineFoodOrderingSystem.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.function.Function;
@@ -45,5 +45,12 @@ public class JwtService {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
+    }
+
+    public boolean validateToken(UserDetails userDetails,String token) {
+        if (userDetails.getUsername().equals( extractUsername(token) )) {
+            return true;
+        }
+        return false;
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
@@ -61,11 +62,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
 //        verify the header
         if (username != null && SecurityContextHolder.getContext().getAuthentication()==null) {
-            User user = new CustomUserDetailService().loadUserByUsername(username);
+            UserDetails userDetails = new CustomUserDetailService().loadUserByUsername(username);
 
-            if(jwtService.validateToken()){
-                UsernamePasswordAuthenticationToken upaAToken = new UsernamePasswordAuthenticationToken(ema)
-                SecurityContextHolder.getContext().setAuthentication();
+            if(jwtService.validateToken(userDetails,token)){
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authToken);
 
             }
         }
