@@ -1,4 +1,4 @@
-package com.example.OnlineFoodOrderingSystem.sevice;
+package com.example.OnlineFoodOrderingSystem.service;
 
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

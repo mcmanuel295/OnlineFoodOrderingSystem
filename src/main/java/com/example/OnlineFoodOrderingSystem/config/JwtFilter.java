@@ -1,7 +1,7 @@
 package com.example.OnlineFoodOrderingSystem.config;
 
 import com.example.OnlineFoodOrderingSystem.model.User;
-import com.example.OnlineFoodOrderingSystem.sevice.CustomUserDetailService;
+import com.example.OnlineFoodOrderingSystem.service.CustomUserDetailService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -15,13 +15,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
 
 @Configuration
