@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-@Table(name = "order_items", indexes = @Index(name = "idx_items_id", columnList = "items_id"))
 @Entity
 @Data
 @NoArgsConstructor
@@ -14,12 +13,12 @@ import java.util.List;
 public class OrderItems {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemsId;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Orders order;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "food")

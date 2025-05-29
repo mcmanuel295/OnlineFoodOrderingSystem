@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String fullName;
     private String email;
@@ -25,7 +25,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Orders> order = new ArrayList<>();
+    private List<Order> order = new ArrayList<>();
 
     @ElementCollection
     private List<RestaurantDto> favourite = new ArrayList<>();
