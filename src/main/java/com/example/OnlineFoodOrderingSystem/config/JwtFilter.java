@@ -1,7 +1,7 @@
 package com.example.OnlineFoodOrderingSystem.config;
 
-import com.example.OnlineFoodOrderingSystem.model.User;
 import com.example.OnlineFoodOrderingSystem.service.CustomUserDetailService;
+import com.example.OnlineFoodOrderingSystem.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
