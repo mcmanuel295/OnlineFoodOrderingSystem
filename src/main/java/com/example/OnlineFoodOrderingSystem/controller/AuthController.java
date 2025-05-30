@@ -3,6 +3,7 @@ package com.example.OnlineFoodOrderingSystem.controller;
 import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
 import com.example.OnlineFoodOrderingSystem.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
-    public ResponseEntity<User> createUser(@Valid @RequestBody  User user){
-        User savedUser = authService.createUser(user);
-         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    public ResponseEntity<AuthResponse> createUser(@Valid @RequestBody  User user){
+        AuthResponse authResponse = authService.createUser(user);
+         return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
 
 

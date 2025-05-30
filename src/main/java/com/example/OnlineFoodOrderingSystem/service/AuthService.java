@@ -7,7 +7,10 @@ import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.repository.CartRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ public class AuthService {
 
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authManager;
     private final JwtService jwtService;
     private CartRepository cartRepository;
 
@@ -41,5 +45,10 @@ public class AuthService {
 
     public User login(LoginRequest loginRequest) {
 
+        Authentication authToken = new UsernamePasswordAuthenticationToken(loginRequest.getPassword(),loginRequest.getPassword());
+        Authentication authentication = authManager.authenticate(authToken);
+        jwtService.generateToken(authentication);
     }
+
+    UsernamePasswordAuthenticationToken
 }
