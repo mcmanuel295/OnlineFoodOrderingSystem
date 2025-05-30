@@ -1,4 +1,4 @@
-package com.example.OnlineFoodOrderingSystem.model;
+package com.example.OnlineFoodOrderingSystem.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,27 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItem {
+public class IngredientsCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @JsonIgnore
     @ManyToOne
-    private Cart cart;
+    private Restaurant restaurant;
 
-    @ManyToOne
-    private Food food;
-
-    private int quantity;
-
-    private List<String> ingredients;
-
-    private long totalPrice;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<IngredientsItem> ingredientsItems = new ArrayList<>();
 }

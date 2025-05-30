@@ -1,6 +1,6 @@
 package com.example.OnlineFoodOrderingSystem.service;
 
-import com.example.OnlineFoodOrderingSystem.model.User;
+import com.example.OnlineFoodOrderingSystem.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

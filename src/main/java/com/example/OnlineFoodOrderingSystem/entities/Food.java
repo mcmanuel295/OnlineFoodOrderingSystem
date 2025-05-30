@@ -1,4 +1,4 @@
-package com.example.OnlineFoodOrderingSystem.model;
+package com.example.OnlineFoodOrderingSystem.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

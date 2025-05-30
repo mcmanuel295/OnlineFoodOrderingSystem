@@ -1,6 +1,6 @@
 package com.example.OnlineFoodOrderingSystem.service;
 
-import com.example.OnlineFoodOrderingSystem.model.User;
+import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

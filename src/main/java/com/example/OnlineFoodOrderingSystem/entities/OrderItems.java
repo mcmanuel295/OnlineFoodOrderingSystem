@@ -1,4 +1,4 @@
-package com.example.OnlineFoodOrderingSystem.model;
+package com.example.OnlineFoodOrderingSystem.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class OrderItems {
 
     @ManyToOne
     @JoinColumn(name = "food")
-    private  Food food;
+    private Food food;
 
     private int quantity;
     private long totalPrice;

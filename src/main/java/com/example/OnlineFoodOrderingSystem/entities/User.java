@@ -1,6 +1,7 @@
-package com.example.OnlineFoodOrderingSystem.model;
+package com.example.OnlineFoodOrderingSystem.entities;
 
 import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
+import com.example.OnlineFoodOrderingSystem.model.USER_ROLE;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

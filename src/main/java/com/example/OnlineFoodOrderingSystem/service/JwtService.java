@@ -1,21 +1,15 @@
 package com.example.OnlineFoodOrderingSystem.service;
 
-import com.example.OnlineFoodOrderingSystem.model.User;
+import com.example.OnlineFoodOrderingSystem.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collection;
 import java.util.Date;
 import java.util.function.Function;
 
@@ -74,6 +68,4 @@ public class JwtService {
         }
         return false;
     }
-
-    private
 }

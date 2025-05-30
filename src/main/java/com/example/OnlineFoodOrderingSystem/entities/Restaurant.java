@@ -1,5 +1,6 @@
-package com.example.OnlineFoodOrderingSystem.model;
+package com.example.OnlineFoodOrderingSystem.entities;
 
+import com.example.OnlineFoodOrderingSystem.model.ContactInformation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
