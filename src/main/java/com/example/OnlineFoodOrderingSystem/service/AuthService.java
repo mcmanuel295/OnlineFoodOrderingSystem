@@ -43,11 +43,16 @@ public class AuthService {
     }
 
 
-    public User login(LoginRequest loginRequest) {
+    public AuthResponse login(LoginRequest loginRequest) {
 
         Authentication authToken = new UsernamePasswordAuthenticationToken(loginRequest.getPassword(),loginRequest.getPassword());
         Authentication authentication = authManager.authenticate(authToken);
         String token = jwtService.generateToken(authentication);
+
+        return AuthResponse.builder()
+                .jwt(token)
+                .message("Registered successfully")
+                .build();
     }
 
  }
