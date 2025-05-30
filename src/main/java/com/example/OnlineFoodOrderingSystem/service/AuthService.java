@@ -2,6 +2,7 @@ package com.example.OnlineFoodOrderingSystem.service;
 
 import com.example.OnlineFoodOrderingSystem.entities.Cart;
 import com.example.OnlineFoodOrderingSystem.entities.User;
+import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
 import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.repository.CartRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
@@ -20,7 +21,7 @@ public class AuthService {
     private CartRepository cartRepository;
 
 
-    public User createUser(User user) {
+    public AuthResponse createUser(User user) {
         if (userRepo.findById(user.getUserId()).isPresent()) {
             throw new RuntimeException("User already exist");
         }
@@ -30,11 +31,15 @@ public class AuthService {
         cart.setCustomer(user);
         cartRepository.save(cart);
 
-        return userRepo.save(user);
+        return AuthResponse
+                .builder()
+                .user(userRepo.save(user))
+                .message("User created successfully")
+                .build();
     }
 
-    public User login(LoginRequest loginRequest) {
 
+    public User login(LoginRequest loginRequest) {
 
     }
 }
