@@ -41,8 +41,7 @@ public class AuthService {
                 .builder()
                 .user(savedUser)
                 .message("User created successfully")
-                .build();
-    }
+                .build()
 
 
     public AuthResponse login(LoginRequest loginRequest) {
