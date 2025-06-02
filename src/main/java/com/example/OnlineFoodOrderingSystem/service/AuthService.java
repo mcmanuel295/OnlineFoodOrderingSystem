@@ -26,8 +26,8 @@ public class AuthService {
 
 
     public AuthResponse createUser(User user) {
-        if (userRepo.findById(user.getUserId()).isPresent()) {
-            throw new RuntimeException("User already exist");
+        if (user.getUserId() != null && userRepo.findById(user.getUserId()).isPresent()) {
+            throw new RuntimeException("User already exist or invalid user Id");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

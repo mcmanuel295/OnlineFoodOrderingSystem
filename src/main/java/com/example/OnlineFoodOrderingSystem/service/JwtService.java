@@ -26,7 +26,7 @@ public class JwtService {
 
     public JwtService(UserRepository userRepository) throws NoSuchAlgorithmException {
         userRepo = userRepository;
-        KeyGenerator keyGen = KeyGenerator.getInstance("HmacSha256");
+        KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
         SecretKey secretKey = keyGen.generateKey();
         stringFromSecretKey = Base64.getEncoder().encodeToString(secretKey.getEncoded());
     }
