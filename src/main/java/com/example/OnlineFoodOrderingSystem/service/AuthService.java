@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,25 +35,28 @@ public class AuthService {
         Cart cart = new Cart();
         cart.setCustomer(user);
         cartRepository.save(cart);
+        User savedUser = userRepo.save(user);
 
         return AuthResponse
                 .builder()
-                .user(userRepo.save(user))
+                .user(savedUser)
                 .message("User created successfully")
                 .build();
     }
 
 
     public AuthResponse login(LoginRequest loginRequest) {
-
         Authentication authToken = new UsernamePasswordAuthenticationToken(loginRequest.getPassword(),loginRequest.getPassword());
         Authentication authentication = authManager.authenticate(authToken);
-        String token = jwtService.generateToken(authentication);
 
-        return AuthResponse.builder()
-                .jwt(token)
-                .message("Registered successfully")
-                .build();
+            if (authentication.isAuthenticated()){
+            String token = jwtService.generateToken(authentication);
+
+            return AuthResponse.builder()
+                    .jwt(token)
+                    .message("Registered successfully")
+                    .build();
+        }
     }
 
  }
