@@ -35,10 +35,11 @@ public class AuthService {
         if (user.getRole() == null) {
             user.setRole(USER_ROLE.ROLE_USER);
         }
-        Cart cart = new Cart();
-        cart.setCustomer(user);
-        cartRepository.save(cart);
         User savedUser = userRepo.save(user);
+
+        Cart cart = new Cart();
+        cart.setCustomer(savedUser);
+        cartRepository.save(cart);
 
         return AuthResponse
                 .builder()
