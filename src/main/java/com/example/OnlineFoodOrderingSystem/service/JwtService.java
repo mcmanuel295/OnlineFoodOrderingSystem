@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -59,17 +57,17 @@ public class JwtService {
     }
 
     public String generateToken(Authentication authentication){
-        System.out.println( authentication.getName());
-
+        Map<String,Object> claims = new HashMap<>();
         User user = userRepo.findByEmail(authentication.getName()).orElseThrow(()-> new UsernameNotFoundException("User not found"));
         return Jwts
                 .builder()
-                .subject(user.getUserId().toString())
+                .claims()
+                .add(claims)
+                .subject(user.getEmail())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+ (24 * 60 * 60 * 1000) ))
-                .signWith(getKeys())
-                .claims()
                 .and()
+                .signWith(getKeys())
                 .compact();
     }
 
