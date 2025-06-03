@@ -38,6 +38,8 @@ public class JwtFilter extends OncePerRequestFilter {
             token = header.substring(7);
             username = jwtService.extractUsername(token);
 
+            System.out.println("the String for username in jwtFilter is "+username);
+
 
 
             //        verify the header
