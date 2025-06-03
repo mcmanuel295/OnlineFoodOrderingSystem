@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-    private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUser(@Valid @RequestBody  User user){
+    public ResponseEntity<AuthResponse> createUser(@Valid @RequestBody User user){
+        System.out.println(user.getFullName()+ " "+user.getEmail()+" "+" " +user.getPassword()+" "+user.getRole());
         AuthResponse authResponse = authService.createUser(user);
          return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
