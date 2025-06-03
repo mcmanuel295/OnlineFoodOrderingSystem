@@ -4,13 +4,13 @@ import com.example.OnlineFoodOrderingSystem.entities.Cart;
 import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
 import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
+import com.example.OnlineFoodOrderingSystem.model.USER_ROLE;
 import com.example.OnlineFoodOrderingSystem.repository.CartRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
 
     public AuthResponse createUser(User user) {
@@ -32,6 +32,9 @@ public class AuthService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+        if (user.getRole() == null) {
+            user.setRole(USER_ROLE.ROLE_USER);
+        }
         Cart cart = new Cart();
         cart.setCustomer(user);
         cartRepository.save(cart);
@@ -41,21 +44,18 @@ public class AuthService {
                 .builder()
                 .user(savedUser)
                 .message("User created successfully")
-                .build()
+                .build();
+    }
 
 
     public AuthResponse login(LoginRequest loginRequest) {
         Authentication authToken = new UsernamePasswordAuthenticationToken(loginRequest.getPassword(),loginRequest.getPassword());
         Authentication authentication = authManager.authenticate(authToken);
 
-            if (authentication.isAuthenticated()){
-            String token = jwtService.generateToken(authentication);
-
-            return AuthResponse.builder()
-                    .jwt(token)
-                    .message("Registered successfully")
-                    .build();
+        String token = jwtService.generateToken(authentication);
+        return AuthResponse.builder()
+                .jwt(token)
+                .message("Registered successfully")
+                .build();
         }
-    }
-
  }

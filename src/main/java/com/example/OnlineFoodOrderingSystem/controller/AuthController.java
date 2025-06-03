@@ -4,6 +4,7 @@ import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
 import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.service.AuthService;
+import com.example.OnlineFoodOrderingSystem.service.intf.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final UserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUser(@Valid @RequestBody  User user){
