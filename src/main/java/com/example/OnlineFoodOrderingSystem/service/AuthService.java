@@ -50,9 +50,11 @@ public class AuthService {
 
 
     public AuthResponse login(LoginRequest loginRequest) {
-        Authentication authToken = new UsernamePasswordAuthenticationToken(loginRequest.getPassword(),loginRequest.getPassword());
+        Authentication authToken = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),loginRequest.getPassword());
         Authentication authentication = authManager.authenticate(authToken);
+        System.out.println("is authenticated "+authentication.isAuthenticated());
 
+        System.out.println( authentication.getPrincipal() +" "+authentication.getCredentials());
         String token = jwtService.generateToken(authentication);
         return AuthResponse.builder()
                 .jwt(token)

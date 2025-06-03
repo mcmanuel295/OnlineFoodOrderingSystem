@@ -4,9 +4,10 @@ import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
 import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.service.AuthService;
-import com.example.OnlineFoodOrderingSystem.service.intf.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUser(@Valid @RequestBody User user){
-        System.out.println(user.getFullName()+ " "+user.getEmail()+" "+" " +user.getPassword()+" "+user.getRole());
         AuthResponse authResponse = authService.createUser(user);
          return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
@@ -30,6 +31,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest){
+        System.out.println("Signing in "+loginRequest.getEmail()+" "+loginRequest.getPassword());
          return new ResponseEntity<>(authService.login(loginRequest),HttpStatus.OK);
     }
 }

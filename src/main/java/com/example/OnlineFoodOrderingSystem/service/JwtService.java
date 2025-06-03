@@ -59,7 +59,9 @@ public class JwtService {
     }
 
     public String generateToken(Authentication authentication){
-        User user = userRepo.findByEmail(authentication.getPrincipal().toString()).orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        System.out.println( authentication.getName());
+
+        User user = userRepo.findByEmail(authentication.getName()).orElseThrow(()-> new UsernameNotFoundException("User not found"));
         return Jwts
                 .builder()
                 .subject(user.getUserId().toString())
