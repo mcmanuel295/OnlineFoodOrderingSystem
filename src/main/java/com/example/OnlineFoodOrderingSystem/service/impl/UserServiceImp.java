@@ -16,6 +16,8 @@ public class UserServiceImp implements UserService {
 
     public User findUserByJwtToken(String token){
         String username = jwtService.extractUsername(token);
+        System.out.println("username "+username);
+        
         return userRepo.findByEmail(username).orElseThrow(()->
                 new UsernameNotFoundException("user "+username+" not found"));
     }
