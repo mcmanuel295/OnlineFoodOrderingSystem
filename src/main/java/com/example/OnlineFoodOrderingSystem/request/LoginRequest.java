@@ -1,4 +1,4 @@
-package com.example.OnlineFoodOrderingSystem.pojo;
+package com.example.OnlineFoodOrderingSystem.request;
 
 import lombok.Data;
 

@@ -3,7 +3,7 @@ package com.example.OnlineFoodOrderingSystem.service;
 import com.example.OnlineFoodOrderingSystem.entities.Cart;
 import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.pojo.AuthResponse;
-import com.example.OnlineFoodOrderingSystem.pojo.LoginRequest;
+import com.example.OnlineFoodOrderingSystem.request.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.pojo.USER_ROLE;
 import com.example.OnlineFoodOrderingSystem.repository.CartRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;

@@ -2,7 +2,7 @@ package com.example.OnlineFoodOrderingSystem.controller;
 
 import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.pojo.AuthResponse;
-import com.example.OnlineFoodOrderingSystem.pojo.LoginRequest;
+import com.example.OnlineFoodOrderingSystem.request.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
