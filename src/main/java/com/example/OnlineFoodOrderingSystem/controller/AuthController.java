@@ -1,8 +1,8 @@
 package com.example.OnlineFoodOrderingSystem.controller;
 
 import com.example.OnlineFoodOrderingSystem.entities.User;
-import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
-import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
+import com.example.OnlineFoodOrderingSystem.pojo.AuthResponse;
+import com.example.OnlineFoodOrderingSystem.pojo.LoginRequest;
 import com.example.OnlineFoodOrderingSystem.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

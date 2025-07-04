@@ -23,6 +23,7 @@ public class Cart {
     private Long total;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "cart_Items ")
     private List<CartItem> cartItems = new ArrayList<>();
 
 }

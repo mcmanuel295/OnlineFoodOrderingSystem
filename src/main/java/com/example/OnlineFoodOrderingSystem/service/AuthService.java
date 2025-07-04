@@ -2,9 +2,9 @@ package com.example.OnlineFoodOrderingSystem.service;
 
 import com.example.OnlineFoodOrderingSystem.entities.Cart;
 import com.example.OnlineFoodOrderingSystem.entities.User;
-import com.example.OnlineFoodOrderingSystem.model.AuthResponse;
-import com.example.OnlineFoodOrderingSystem.model.LoginRequest;
-import com.example.OnlineFoodOrderingSystem.model.USER_ROLE;
+import com.example.OnlineFoodOrderingSystem.pojo.AuthResponse;
+import com.example.OnlineFoodOrderingSystem.pojo.LoginRequest;
+import com.example.OnlineFoodOrderingSystem.pojo.USER_ROLE;
 import com.example.OnlineFoodOrderingSystem.repository.CartRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

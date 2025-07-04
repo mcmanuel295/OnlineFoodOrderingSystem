@@ -1,9 +1,8 @@
 package com.example.OnlineFoodOrderingSystem.entities;
 
 import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
-import com.example.OnlineFoodOrderingSystem.model.USER_ROLE;
+import com.example.OnlineFoodOrderingSystem.pojo.USER_ROLE;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

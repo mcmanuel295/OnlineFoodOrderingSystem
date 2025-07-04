@@ -1,4 +1,4 @@
-package com.example.OnlineFoodOrderingSystem.model;
+package com.example.OnlineFoodOrderingSystem.pojo;
 
 public enum USER_ROLE {
     ROLE_CUSTOMER ("customer"),
