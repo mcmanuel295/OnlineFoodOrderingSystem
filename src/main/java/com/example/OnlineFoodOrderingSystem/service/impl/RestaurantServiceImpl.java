@@ -5,6 +5,7 @@ import com.example.OnlineFoodOrderingSystem.repository.AddressRepository;
 import com.example.OnlineFoodOrderingSystem.repository.RestaurantRepository;
 import com.example.OnlineFoodOrderingSystem.request.RestaurantRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.RestaurantService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
 
         if (restaurant.isEmpty()) {
-            throw new RuntimeException("Invalid restaurantId ");
+            throw new EntityNotFoundException("Invalid restaurantId ");
         }
 
         if (restaurant.get().getCuisineType() != null) {
@@ -61,7 +62,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant deleteRestaurant(long restaurantId) {
-        return null;
+        Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
+
+        if (restaurant.isEmpty()) {
+            throw new EntityNotFoundException()
+        }
     }
 
     @Override
