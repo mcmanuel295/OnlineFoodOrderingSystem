@@ -3,6 +3,7 @@ package com.example.OnlineFoodOrderingSystem.entities;
 import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
 import com.example.OnlineFoodOrderingSystem.pojo.USER_ROLE;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class User {
     private String email;
 
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String password;
 
     @Enumerated(EnumType.STRING)
