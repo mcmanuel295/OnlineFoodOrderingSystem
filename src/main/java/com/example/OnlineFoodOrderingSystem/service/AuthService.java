@@ -25,7 +25,7 @@ public class AuthService {
     private final CartRepository cartRepository;
 
 
-    public AuthResponse createUser(User user) {
+    public AuthResponse   createUser(User user) {
         if (user.getUserId() != null && userRepo.findById(user.getUserId()).isPresent()) {
             throw new RuntimeException("User already exist or invalid user Id");
         }
