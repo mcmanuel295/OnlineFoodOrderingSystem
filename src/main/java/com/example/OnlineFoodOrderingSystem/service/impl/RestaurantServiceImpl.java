@@ -61,12 +61,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant deleteRestaurant(long restaurantId) {
+    public void deleteRestaurant(long restaurantId) {
         Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
 
-        if (restaurant.isEmpty()) {
-            throw new EntityNotFoundException()
+        if (restaurant.isEmpty()) {git sta
+            throw new EntityNotFoundException("Restaurant not found");
         }
+
+        restaurantRepo.deleteById(restaurantId);
     }
 
     @Override

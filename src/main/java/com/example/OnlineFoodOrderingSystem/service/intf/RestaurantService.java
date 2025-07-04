@@ -13,7 +13,7 @@ public interface RestaurantService {
 
     Restaurant updateRestaurant(long restaurantId, Restaurant updatedRestaurant);
 
-    Restaurant deleteRestaurant(long restaurantId);
+    void deleteRestaurant(long restaurantId);
 
     List<Restaurant> getAllRestaurant();
 
