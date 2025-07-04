@@ -24,6 +24,8 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUser(@Valid @RequestBody User user){
+
+        System.out.println("the user password is "+user.getPassword());
         AuthResponse authResponse = authService.createUser(user);
          return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
