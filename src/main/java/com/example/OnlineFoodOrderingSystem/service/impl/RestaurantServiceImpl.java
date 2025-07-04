@@ -73,26 +73,37 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<Restaurant> getAllRestaurant() {
-        return List.of();
+        return restaurantRepo.findAll();
     }
 
     @Override
-    public List<Restaurant> searchRestaurant(long restaurantId, Restaurant updatedRestaurant) {
-        return List.of();
+    public List<Restaurant> searchRestaurant(String searchKey) {
+        return restaurantRepo.findBySearchQuery(searchKey);
     }
 
     @Override
     public Restaurant getRestaurantById(long restaurantId) {
-        return null;
+        Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
+
+        if (restaurant.isEmpty()) {
+            throw new EntityNotFoundException("Restaurant with id "+restaurantId+" not found");
+        }
+        return restaurant.get();
     }
 
     @Override
     public Restaurant getRestaurantByUserId(long userId) {
-        return null;
+        Optional<Restaurant> restaurant = restaurantRepo.findByOwnerId(userId);
+
+        if (restaurant.isEmpty()) {
+            throw new EntityNotFoundException("Restaurant with ownerId "+userId+" not found");
+        }
+        return restaurant.get();
     }
 
     @Override
     public Restaurant addToFavourite(long restaurantId, User user) {
+
         return null;
     }
 

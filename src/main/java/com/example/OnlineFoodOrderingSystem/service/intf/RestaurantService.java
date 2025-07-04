@@ -17,7 +17,7 @@ public interface RestaurantService {
 
     List<Restaurant> getAllRestaurant();
 
-    List<Restaurant> searchRestaurant(long restaurantId, Restaurant updatedRestaurant);
+    List<Restaurant> searchRestaurant(String searchKey);
 
     Restaurant getRestaurantById(long restaurantId);
 
