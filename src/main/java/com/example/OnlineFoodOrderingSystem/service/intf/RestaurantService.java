@@ -1,6 +1,7 @@
 package com.example.OnlineFoodOrderingSystem.service.intf;
 
 
+import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
 import com.example.OnlineFoodOrderingSystem.entities.Restaurant;
 import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.request.RestaurantRequest;
@@ -23,7 +24,7 @@ public interface RestaurantService {
 
     Restaurant getRestaurantByUserId(long userId);
 
-    Restaurant addToFavourite(long restaurantId, User user);
+    RestaurantDto addToFavourite(long restaurantId, User user);
 
     Restaurant updateRestaurantStatus(long restaurantId);
 

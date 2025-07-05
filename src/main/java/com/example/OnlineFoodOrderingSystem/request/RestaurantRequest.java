@@ -3,13 +3,8 @@ package com.example.OnlineFoodOrderingSystem.request;
 import com.example.OnlineFoodOrderingSystem.entities.Address;
 import com.example.OnlineFoodOrderingSystem.pojo.ContactInformation;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
-//@Getter
-//@Setter
 @Data
 public class RestaurantRequest {
 

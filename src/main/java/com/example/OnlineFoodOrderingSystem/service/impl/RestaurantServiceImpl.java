@@ -1,12 +1,16 @@
 package com.example.OnlineFoodOrderingSystem.service.impl;
 
+import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
 import com.example.OnlineFoodOrderingSystem.entities.*;
 import com.example.OnlineFoodOrderingSystem.repository.AddressRepository;
 import com.example.OnlineFoodOrderingSystem.repository.RestaurantRepository;
+import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import com.example.OnlineFoodOrderingSystem.request.RestaurantRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.RestaurantService;
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepo;
     private final AddressRepository addressRepo;
+    private final UserRepository userRepo;
 
     @Override
     public Restaurant createRestaurant(RestaurantRequest restaurantRequest,User user) {
@@ -93,7 +98,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant getRestaurantByUserId(long userId) {
-        Optional<Restaurant> restaurant = restaurantRepo.findByOwnerId(userId);
+        Optional<User> user = userRepo.findById(userId);
+        if (user.isEmpty()){
+            throw new EntityNotFoundException("User with user id "+userId+" not found");
+        }
+        Optional<Restaurant> restaurant = restaurantRepo.findByOwner(user.get());
 
         if (restaurant.isEmpty()) {
             throw new EntityNotFoundException("Restaurant with ownerId "+userId+" not found");
@@ -102,14 +111,39 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant addToFavourite(long restaurantId, User user) {
+    public RestaurantDto addToFavourite(long restaurantId, User user) {
+        if (userRepo.findById(user.getUserId()).isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
+        if (restaurant.isEmpty()) {
+            throw new UsernameNotFoundException("restaurant not found");
+        }
 
-        return null;
+//        Converting restaurant to dto
+        RestaurantDto restaurantDto = new RestaurantDto();
+        restaurantDto.setId(restaurant.get().getRestaurantId());
+        restaurantDto.setTitle(restaurant.get().getName());
+        restaurantDto.setDescription(restaurant.get().getDescription());
+        restaurantDto.setImages(restaurant.get().getImages());
+
+        user.getFavourite().remove(restaurantDto);
+        user.getFavourite().add(restaurantDto);
+
+        userRepo.save(user);
+        return restaurantDto;
     }
 
     @Override
     public Restaurant updateRestaurantStatus(long restaurantId) {
-        return null;
+        Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
+
+        if (restaurant.isEmpty()) {
+            throw new EntityNotFoundException("Restaurant not found");
+        }
+
+        restaurant.get().setOpen(!restaurant.get().isOpen());
+        return restaurantRepo.save(restaurant.get()  );
     }
 
 
