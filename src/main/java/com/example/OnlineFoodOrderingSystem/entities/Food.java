@@ -19,9 +19,7 @@ public class Food {
     private Long foodId;
 
     private String name;
-
     private String description;
-
     private Long price;
 
     @ManyToOne
