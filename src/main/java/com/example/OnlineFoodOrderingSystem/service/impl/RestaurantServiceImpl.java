@@ -7,7 +7,6 @@ import com.example.OnlineFoodOrderingSystem.repository.RestaurantRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import com.example.OnlineFoodOrderingSystem.request.RestaurantRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.RestaurantService;
-import jakarta.persistence.Column;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
