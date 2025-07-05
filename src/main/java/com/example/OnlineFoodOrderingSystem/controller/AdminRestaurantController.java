@@ -24,8 +24,28 @@ public class AdminRestaurantController {
         return new ResponseEntity<>(restaurantService.createRestaurant(restaurantRequest,user), HttpStatus.CREATED);
     }
 
-    @PutMapping("/")
-    public ResponseEntity<Restaurant> updateRestaurant(@Valid long restaurantId ,@Valid @RequestBody Restaurant updatedRestaurant){
-        return new ResponseEntity<>(restaurantService.updateRestaurant(restaurantId,updatedRestaurant), HttpStatus.CREATED);
+
+    @GetMapping("/user")
+    private ResponseEntity<Restaurant> findRestaurantByOwnerId(@RequestHeader("Authorization") String jwt){
+        User user = userService.findUserByJwtToken(jwt);
+        return new ResponseEntity<>(restaurantService.getRestaurantByOwnerId(user.getUserId()),HttpStatus.OK);
     }
+
+
+    @PutMapping("/{restaurantId}")
+    public ResponseEntity<Restaurant> updateRestaurant(@Valid @PathVariable long restaurantId ,@Valid @RequestBody Restaurant updatedRestaurant){
+        return new ResponseEntity<>(restaurantService.updateRestaurant(restaurantId,updatedRestaurant), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{restaurantId}")
+    private ResponseEntity<String> deleteRestaurant(@PathVariable @Valid long restaurantId){
+        restaurantService.deleteRestaurant(restaurantId);
+        return new ResponseEntity<>("Restaurant "+restaurantId+"deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{restaurantId}/status")
+    private ResponseEntity<Restaurant> updateRestaurantStatus(@PathVariable @Valid long restaurantId){
+        return new ResponseEntity<>(restaurantService.updateRestaurantStatus(restaurantId),HttpStatus.OK);
+    }
+
 }

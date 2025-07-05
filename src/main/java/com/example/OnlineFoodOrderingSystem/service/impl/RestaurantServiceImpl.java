@@ -97,7 +97,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant getRestaurantByUserId(long userId) {
+    public Restaurant getRestaurantByOwnerId(long userId) {
         Optional<User> user = userRepo.findById(userId);
         if (user.isEmpty()){
             throw new EntityNotFoundException("User with user id "+userId+" not found");

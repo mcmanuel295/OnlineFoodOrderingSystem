@@ -22,7 +22,7 @@ public interface RestaurantService {
 
     Restaurant getRestaurantById(long restaurantId);
 
-    Restaurant getRestaurantByUserId(long userId);
+    Restaurant getRestaurantByOwnerId(long userId);
 
     RestaurantDto addToFavourite(long restaurantId, User user);
 
