@@ -6,10 +6,12 @@ import com.example.OnlineFoodOrderingSystem.entities.Restaurant;
 import com.example.OnlineFoodOrderingSystem.repository.FoodRepository;
 import com.example.OnlineFoodOrderingSystem.request.CreateFoodRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.FoodService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +41,13 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public void deleteFood(long foodId) {
+        Optional<Food> food = foodRepo.findByFoodId(foodId);
 
+        if (food.isEmpty()) {
+            throw new EntityNotFoundException("The Food with foodId "+foodId+" not found");
+        }
+
+        foodRepo.deleteById(foodId);
     }
 
     @Override
