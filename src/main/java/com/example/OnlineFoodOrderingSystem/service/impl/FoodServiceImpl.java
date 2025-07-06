@@ -4,6 +4,7 @@ import com.example.OnlineFoodOrderingSystem.entities.Category;
 import com.example.OnlineFoodOrderingSystem.entities.Food;
 import com.example.OnlineFoodOrderingSystem.entities.Restaurant;
 import com.example.OnlineFoodOrderingSystem.repository.FoodRepository;
+import com.example.OnlineFoodOrderingSystem.repository.RestaurantRepository;
 import com.example.OnlineFoodOrderingSystem.request.CreateFoodRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.FoodService;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FoodServiceImpl implements FoodService {
     private final FoodRepository foodRepo;
+    private final RestaurantRepository restaurantRepo;
 
 
     @Override
@@ -47,13 +49,22 @@ public class FoodServiceImpl implements FoodService {
             throw new EntityNotFoundException("The Food with foodId "+foodId+" not found");
         }
 
-        foodRepo.deleteById(foodId);
+        food.get().setRestaurant(null);
+        foodRepo.save(food.get());
     }
 
     @Override
     public List<Food> getRestaurantFood(long restaurantId, boolean isVegetarian, boolean nonVegetarian, boolean isSeasonal, String foodCategory) {
+        Optional<Restaurant> restaurant = restaurantRepo.findById(restaurantId);
+        if (restaurant.isEmpty()) {
+            throw new EntityNotFoundException("Restaurant with id "+restaurantId+" not found");
+        }
+
+
         return List.of();
+
     }
+
 
     @Override
     public List<Food> searchFood(String keyword) {
