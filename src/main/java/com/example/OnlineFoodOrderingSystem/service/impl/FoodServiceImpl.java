@@ -42,7 +42,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public void deleteFood(long foodId) {
+    public void deleteFood(long foodId) {git status
         Optional<Food> food = foodRepo.findByFoodId(foodId);
 
         if (food.isEmpty()) {
