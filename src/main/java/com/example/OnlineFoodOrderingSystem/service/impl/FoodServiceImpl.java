@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,15 +61,17 @@ public class FoodServiceImpl implements FoodService {
             throw new EntityNotFoundException("Restaurant with id "+restaurantId+" not found");
         }
 
-
-        return List.of();
-
+        return restaurant.get()
+                .getFoods()
+                .stream()
+                .filter(food -> food.isVegetarian()== isVegetarian && food.isSeasonal()==isSeasonal && food.getFoodCategory().getName().equals(foodCategory))
+                .toList();
     }
 
 
     @Override
     public List<Food> searchFood(String keyword) {
-        return List.of();
+        return foodRepo.searchFood(keyword);
     }
 
     @Override
@@ -79,16 +82,29 @@ public class FoodServiceImpl implements FoodService {
         }
 
         return food.get();
-
     }
 
     @Override
     public Food updateAvailablilityStatus(long foodId) {
-        return null;
+        Optional<Food> food = foodRepo.findByFoodId(foodId);
+
+        if (food.isEmpty()) {
+            throw new EntityNotFoundException("Food with the user Id "+foodId+" not found");
+        }
+        food.get().setAvailable(!(food.get().isAvailable()));
+
+        return foodRepo.save(food.get());
     }
 
     @Override
     public Food updateFood(long foodId, Food updatedFood) {
-        return null;
+        Optional<Food> food = foodRepo.findByFoodId(foodId);
+
+        if (food.isEmpty() ) {
+            throw  new EntityNotFoundException("Food with Id "+foodId+" not found");
+        }
+
+        updatedFood.setFoodId(foodId);
+        return foodRepo.save(updatedFood);
     }
 }
