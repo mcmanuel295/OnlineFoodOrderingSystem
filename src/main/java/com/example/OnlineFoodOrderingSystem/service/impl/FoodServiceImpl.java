@@ -73,7 +73,13 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public Food findById(long foodId) {
-        return null;
+        Optional<Food> food = foodRepo.findById(foodId);
+        if (food.isEmpty()) {
+            throw new EntityNotFoundException("Food with id "+foodId+" not found");
+        }
+
+        return food.get();
+
     }
 
     @Override
