@@ -21,7 +21,7 @@ public class AdminRestaurantController {
     @PostMapping("/")
     public ResponseEntity<Restaurant> createRestaurant(@Valid @RequestBody RestaurantRequest restaurantRequest, @RequestHeader("Authorization") String jwt){
         User user =userService.findUserByJwtToken(jwt);
-        return new ResponseEntity<>(restaurantService.createRestaurant(restaurantRequest,user), HttpStatus.CREATED);
+        return new ResponseEntity<>(restaurantService.createRestaurant(restaurantRequest,jwt), HttpStatus.CREATED);
     }
 
 

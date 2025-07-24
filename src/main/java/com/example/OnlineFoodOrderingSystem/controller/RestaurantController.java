@@ -21,10 +21,9 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
     private final UserService userService;
 
-    @PostMapping("/")
-    public ResponseEntity<Restaurant> createRestaurants(@RequestBody RestaurantRequest request,
-                                                        @RequestHeader("Authorization") String jwt){
-        return new ResponseEntity<>(restaurantService.createRestaurant(request,jwt), HttpStatus.CREATED);
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable @Valid long restaurantId){
+        return new ResponseEntity<>(restaurantService.getRestaurantById(restaurantId), HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -39,15 +38,12 @@ public class RestaurantController {
     }
 
 
-    @GetMapping("/{restaurantId}")
-    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable @Valid long restaurantId){
-        return new ResponseEntity<>(restaurantService.getRestaurantById(restaurantId), HttpStatus.OK);
-    }
-
-
     @GetMapping("/{restaurantId}/add-favourite")
     public ResponseEntity<RestaurantDto> addToFavourites(@PathVariable @Valid long restaurantId, @RequestHeader("Authorization") String jwt){
         User user = userService.findUserByJwtToken(jwt);
         return new ResponseEntity<>(restaurantService.addToFavourite(restaurantId,user), HttpStatus.OK);
     }
+
+
+
 }
