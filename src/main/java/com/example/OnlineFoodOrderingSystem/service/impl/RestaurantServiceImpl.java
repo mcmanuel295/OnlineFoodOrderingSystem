@@ -7,11 +7,11 @@ import com.example.OnlineFoodOrderingSystem.repository.RestaurantRepository;
 import com.example.OnlineFoodOrderingSystem.repository.UserRepository;
 import com.example.OnlineFoodOrderingSystem.request.RestaurantRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.RestaurantService;
+import com.example.OnlineFoodOrderingSystem.service.intf.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +23,15 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepo;
     private final AddressRepository addressRepo;
     private final UserRepository userRepo;
+    private final UserService userService;
 
     @Override
-    public Restaurant createRestaurant(RestaurantRequest restaurantRequest,User user) {
+    public Restaurant createRestaurant(RestaurantRequest restaurantRequest,String jwt) {
+
+       User user = userService.findUserByJwtToken(jwt);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not fund!!");
+        }
 
        Address address=  addressRepo.save(restaurantRequest.getAddress());
        return Restaurant.builder()

@@ -3,6 +3,7 @@ package com.example.OnlineFoodOrderingSystem.controller;
 import com.example.OnlineFoodOrderingSystem.dto.RestaurantDto;
 import com.example.OnlineFoodOrderingSystem.entities.Restaurant;
 import com.example.OnlineFoodOrderingSystem.entities.User;
+import com.example.OnlineFoodOrderingSystem.request.RestaurantRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.RestaurantService;
 import com.example.OnlineFoodOrderingSystem.service.intf.UserService;
 import jakarta.validation.Valid;
@@ -19,6 +20,12 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final UserService userService;
+
+    @PostMapping("/")
+    public ResponseEntity<Restaurant> createRestaurants(@RequestBody RestaurantRequest request,
+                                                        @RequestHeader("Authorization") String jwt){
+        return new ResponseEntity<>(restaurantService.createRestaurant(request,jwt), HttpStatus.CREATED);
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Restaurant>> getAllRestaurants(){

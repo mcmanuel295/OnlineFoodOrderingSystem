@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RestaurantService {
 
-    Restaurant createRestaurant(RestaurantRequest restaurantRequest,User user);
+    Restaurant createRestaurant(RestaurantRequest restaurantRequest,String jwt);
 
     Restaurant updateRestaurant(long restaurantId, Restaurant updatedRestaurant);
 
