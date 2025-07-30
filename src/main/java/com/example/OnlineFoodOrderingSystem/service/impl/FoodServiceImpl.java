@@ -41,6 +41,17 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public Food findById(long foodId) {
+        Optional<Food> food = foodRepo.findById(foodId);
+        if (food.isEmpty()) {
+            throw new EntityNotFoundException("Food with id "+foodId+" not found");
+        }
+
+        return food.get();
+    }
+
+
+    @Override
     public void deleteFood(long foodId) {
         Optional<Food> food = foodRepo.findByFoodId(foodId);
 
@@ -74,15 +85,6 @@ public class FoodServiceImpl implements FoodService {
         return foodRepo.searchFood(keyword);
     }
 
-    @Override
-    public Food findById(long foodId) {
-        Optional<Food> food = foodRepo.findById(foodId);
-        if (food.isEmpty()) {
-            throw new EntityNotFoundException("Food with id "+foodId+" not found");
-        }
-
-        return food.get();
-    }
 
     @Override
     public Food updateAvailabilityStatus(long foodId) {
