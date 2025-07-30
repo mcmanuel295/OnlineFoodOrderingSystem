@@ -11,7 +11,7 @@ public interface FoodService {
 
     Food createFood(CreateFoodRequest foodRequest, Category category, Restaurant restaurant);
 
-    void deleteFood(long foodId);
+    Food findById(long foodId);
 
     List<Food> getRestaurantFood(long restaurantId,
                                  boolean isVegetarian,
@@ -21,9 +21,9 @@ public interface FoodService {
 
     List<Food> searchFood(String keyword);
 
-    Food findById(long foodId);
-
-    Food updateAvailablilityStatus(long foodId);
-
     Food updateFood(long foodId, Food updatedFood);
+
+    Food updateAvailabilityStatus(long foodId);
+
+    void deleteFood(long foodId);
 }

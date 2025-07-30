@@ -10,7 +10,6 @@ import com.example.OnlineFoodOrderingSystem.service.intf.FoodService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -60,10 +59,12 @@ public class FoodServiceImpl implements FoodService {
             throw new EntityNotFoundException("Restaurant with id "+restaurantId+" not found");
         }
 
+
+
         return restaurant.get()
                 .getFoods()
                 .stream()
-                .filter(food -> food.isVegetarian()== isVegetarian && food.isSeasonal()==isSeasonal && food.getFoodCategory().getName().equals(foodCategory))
+                .filter(food -> food.isVegetarian()== isVegetarian ^ food.isVegetarian()== nonVegetarian ^ food.isSeasonal()==isSeasonal ^ food.getFoodCategory().getName().equals(foodCategory))
                 .toList();
     }
 
@@ -84,7 +85,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public Food updateAvailablilityStatus(long foodId) {
+    public Food updateAvailabilityStatus(long foodId) {
         Optional<Food> food = foodRepo.findByFoodId(foodId);
 
         if (food.isEmpty()) {
