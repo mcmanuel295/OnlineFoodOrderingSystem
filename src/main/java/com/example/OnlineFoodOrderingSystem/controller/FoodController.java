@@ -15,7 +15,7 @@ import java.util.List;
 public class FoodController {
     private final FoodService foodService;
 
-    @GetMapping("/{foodId")
+    @GetMapping("/{foodId}")
     public ResponseEntity<Food> findFoodById(@PathVariable long foodId){
         return new ResponseEntity<>(foodService.findById(foodId), HttpStatus.OK);
     }

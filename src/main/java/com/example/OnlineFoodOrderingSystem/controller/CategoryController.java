@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/category")
 @RequiredArgsConstructor
+@RequestMapping("/api/admin/category")
 public class CategoryController {
     private final CategoryService categoryService;
     private final RestaurantService restaurantService;
