@@ -5,7 +5,7 @@ import com.example.OnlineFoodOrderingSystem.entities.IngredientsItem;
 
 import java.util.List;
 
-public interface IngredientService {
+public interface  IngredientService {
 
     IngredientsCategory createIngredientCategory(String name, long restaurantId) throws Exception;
 
