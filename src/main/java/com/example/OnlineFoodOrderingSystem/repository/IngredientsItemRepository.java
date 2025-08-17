@@ -1,4 +1,5 @@
-package com.example.OnlineFoodOrd~eringSystem.repository;
+package com.example.OnlineFoodOrderingSystem.repository;
+
 
 import com.example.OnlineFoodOrderingSystem.entities.IngredientsItem;
 import org.springframework.data.jpa.repository.JpaRepository;
