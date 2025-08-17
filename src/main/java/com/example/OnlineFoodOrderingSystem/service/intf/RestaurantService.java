@@ -20,7 +20,7 @@ public interface RestaurantService {
 
     List<Restaurant> searchRestaurant(String searchKey);
 
-    Restaurant getRestaurantById(long restaurantId);
+    Restaurant getRestaurantById(long restaurantId)throws Exception;
 
     Restaurant getRestaurantByOwnerId(long userId);
 

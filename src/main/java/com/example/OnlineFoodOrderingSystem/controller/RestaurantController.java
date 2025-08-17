@@ -22,7 +22,7 @@ public class RestaurantController {
     private final UserService userService;
 
     @GetMapping("/{restaurantId}")
-    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable @Valid long restaurantId){
+    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable @Valid long restaurantId) throws Exception {
         return new ResponseEntity<>(restaurantService.getRestaurantById(restaurantId), HttpStatus.OK);
     }
 
