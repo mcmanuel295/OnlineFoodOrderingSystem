@@ -37,7 +37,7 @@ public class AuthService {
         User savedUser = userRepo.save(user);
 
         Cart cart = new Cart();
-        cart.setCustomer(savedUser);
+        cart.setUser(savedUser);
         cartRepository.save(cart);
 
         return AuthResponse

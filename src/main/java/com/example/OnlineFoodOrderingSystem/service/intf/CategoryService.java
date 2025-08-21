@@ -8,7 +8,7 @@ public interface CategoryService {
 
     Category createCategory(String name,String jwt);
 
-    List<Category> findCategoryByRestaurantId(long restaurantId);
+    List<Category> findCategoryByRestaurantId(long restaurantId) throws Exception;
 
     Category findCategoryById(long categoryId);
 

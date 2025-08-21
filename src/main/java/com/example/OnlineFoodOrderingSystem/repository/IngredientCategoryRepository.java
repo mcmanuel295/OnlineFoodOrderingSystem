@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface IngredientCategoryRepository extends JpaRepository<IngredientsCategory,Long> {
 
-    @Query("SELECT i FROM IngredientCategory i WHERE i.restaurant.id = :restaurantId")
-    List<IngredientsCategory> findByRestaurantId(long restaurantId);
+    @Query("SELECT i FROM IngredientsCategory i WHERE i.restaurant.restaurantId =:id")
+    List<IngredientsCategory> findByRestaurantId(long id);
 }

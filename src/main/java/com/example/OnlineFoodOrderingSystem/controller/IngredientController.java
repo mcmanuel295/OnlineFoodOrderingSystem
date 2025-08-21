@@ -32,12 +32,18 @@ public class IngredientController {
     @PutMapping("/{id}/stock")
     public ResponseEntity<IngredientsItem> updateIngredientStock(@PathVariable long id) throws Exception {
 
-        return new ResponseEntity<>(ingredientService.updateStock(id),HttpStatus.CREATED);
+        return new ResponseEntity<>(ingredientService.updateStock(id),HttpStatus.OK);
     }
 
-    @GetMapping("/{restaurant/{id}")
+    @GetMapping("/restaurant/{id}")
     public ResponseEntity<List<IngredientsItem>> restaurantIngredient(@PathVariable long id) throws Exception {
 
-        return new ResponseEntity<>(ingredientService.getRestaurantsIngredients(id), HttpStatus.CREATED);
+        return new ResponseEntity<>(ingredientService.getRestaurantsIngredients(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/restaurant/{id}/category")
+    public ResponseEntity<List<IngredientsCategory>> getRestaurantIngredientCategory(@PathVariable long id) throws Exception {
+
+        return new ResponseEntity<>(ingredientService.getIngredientCategoryByRestaurantId(id), HttpStatus.OK);
     }
 }

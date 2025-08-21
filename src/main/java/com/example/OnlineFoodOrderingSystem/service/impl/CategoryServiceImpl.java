@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> findCategoryByRestaurantId(long restaurantId) {
+    public List<Category> findCategoryByRestaurantId(long restaurantId) throws Exception {
         Restaurant restaurant = restaurantService.getRestaurantById(restaurantId);
         if (restaurant == null) {
             throw new EntityNotFoundException("Restaurant not found!!!");
