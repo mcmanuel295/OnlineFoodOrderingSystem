@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItems {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemsId;
@@ -25,9 +24,8 @@ public class OrderItems {
     private Food food;
 
     private int quantity;
-    private long totalPrice;
-
     private List<String> ingredients;
+    private long totalPrice;
 
 }
 

@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,10 +18,13 @@ public class CartItem {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
     @ManyToOne
+    @JoinColumn(name = "food")
     private Food food;
+
     private int quantity;
     private List<String> ingredients;
     private long totalPrice;

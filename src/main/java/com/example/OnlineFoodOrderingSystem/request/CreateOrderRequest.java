@@ -7,4 +7,5 @@ import lombok.Data;
 public class CreateOrderRequest {
     private long restaurantId;
     private Address deliveryAddress;
+
 }

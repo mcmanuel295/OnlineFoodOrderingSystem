@@ -8,7 +8,7 @@ public interface CartService {
 
     CartItem addItemToCart(AddCartItemRequest cart, String  jwt)throws Exception;
     Cart findCartById(long cartId)throws Exception;
-    Cart findCartByUserId(String jwt)throws Exception;
+    Cart findCartByUserId(long userId)throws Exception;
     CartItem updateCartItemQuantity(Long cardItemId, int quantity)throws Exception;
     Cart removeItemFromCart(Long cartItemId, String jwt) throws Exception;
     Long calculateCartTotal(Cart cart)throws Exception;

@@ -2,9 +2,11 @@ package com.example.OnlineFoodOrderingSystem.controller;
 
 import com.example.OnlineFoodOrderingSystem.entities.Cart;
 import com.example.OnlineFoodOrderingSystem.entities.CartItem;
+import com.example.OnlineFoodOrderingSystem.entities.User;
 import com.example.OnlineFoodOrderingSystem.request.AddCartItemRequest;
 import com.example.OnlineFoodOrderingSystem.request.UpdateCartItemRequest;
 import com.example.OnlineFoodOrderingSystem.service.intf.CartService;
+import com.example.OnlineFoodOrderingSystem.service.intf.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/Carts")
 public class CartController {
     private final CartService cartService;
+    private final UserService userService;
 
     @PostMapping("/cart/add")
     public ResponseEntity<CartItem> addItemsToCart(@RequestBody AddCartItemRequest addCartItemRequest, @RequestHeader("Authorization") String jwt) throws Exception {
@@ -59,7 +62,9 @@ public class CartController {
 
     @GetMapping("/cart")
     public ResponseEntity<Cart> findUserCart( @RequestHeader("Authorization") String jwt) throws Exception {
-        Cart cartItem =cartService.findCartByUserId(jwt);
+        User user = userService.findUserByJwtToken(jwt);
+
+        Cart cartItem =cartService.findCartByUserId(user.getUserId());
         if( cartItem ==null){
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }

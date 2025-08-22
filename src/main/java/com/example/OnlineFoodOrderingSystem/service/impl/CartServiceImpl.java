@@ -63,9 +63,8 @@ public class CartServiceImpl implements CartService {
 
 
     @Override
-    public Cart findCartByUserId(String jwt) throws Exception {
-        User user = userService.findUserByJwtToken(jwt);
-        Cart cart = cartRepo.findByUserId(user.getUserId());
+    public Cart findCartByUserId(long userId) throws Exception {
+        Cart cart = cartRepo.findByUserId(userId);
         if (cart == null) {
             throw new EntityNotFoundException("Cart not found");
         }
